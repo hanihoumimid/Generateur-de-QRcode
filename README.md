@@ -1,1 +1,1 @@
-# G-n-rateur-de-QRcode
+Générateur de QRcode produit lors de la nuit de l'info 2024 en binôme avec un étudiant. C'était un défi à relever afin de débloquer des récompenses.
