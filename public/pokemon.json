@@ -1,0 +1,29 @@
+{
+    "pokemons": [
+      {
+        "type": "eau",
+        "list": [
+          { "name": "magicarpe", "imagePath": "magicarpe.png" },
+          { "name": "lokhlass", "imagePath": "lokhlass.png" },
+          { "name": "aquali", "imagePath": "aquali.png" }
+        ]
+      },
+      {
+        "type": "terrestre",
+        "list": [
+          { "name": "raikou", "imagePath": "raikou.png" },
+          { "name": "luxray", "imagePath": "luxray.png" },
+          { "name": "persian (alola)", "imagePath": "persian_alola.png" }
+        ]
+      },
+      {
+        "type": "vol",
+        "list": [
+          { "name": "dracaufeu", "imagePath": "dracaufeu.png" },
+          { "name": "roucarnage", "imagePath": "roucarnage.png" },
+          { "name": "altaria", "imagePath": "altaria.png" }
+        ]
+      }
+    ]
+  }
+  

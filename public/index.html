@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Pokémon</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-image: url("pokemon_fond.png");
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    img {
+      margin-top: 20px;
+      display: none; /* Masquer l'image au départ */
+      max-width: 100%; /* Limite la largeur de l'image à 100% du conteneur */
+      height: auto; /* Conserve l'aspect ratio de l'image */
+    }
+    #result {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px; /* Ajustez selon vos besoins */
+    }
+    /* Optionnel : pour un fond uniquement sur l'image */
+    #result img {
+      background-color: black; /* Fond noir uniquement autour de l'image */
+      padding: 10px; /* Un peu d'espace autour de l'image */
+      border-radius: 5%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Générateur de QR Code Pokémon</h1>
+  <form id="qrForm">
+    <input id="link" placeholder="Entrez un lien" required />
+    <button type="submit">Générer</button>
+  </form>
+  <div id="result">
+    <img id="qrImage" src="" alt="QR Code Pokémon" />
+  </div>
+  <script>
+    document.getElementById('qrForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const link = document.getElementById('link').value;
+  
+      // Masquer l'image avant la génération
+      const qrImage = document.getElementById('qrImage');
+      qrImage.style.display = 'none'; // Masquer l'image jusqu'à ce qu'elle soit générée
+  
+      // Envoi de la requête pour générer le QR code
+      const response = await fetch('http://localhost:3000/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: link }),
+      });
+  
+      // Vérification de la réponse
+      if (response.ok) {
+        // Si la réponse est valide, récupérer l'image en format Blob
+        const qrBlob = await response.blob();
+        
+        // Créer une URL d'objet à partir du Blob
+        const qrImageUrl = URL.createObjectURL(qrBlob);
+        console.log(qrImageUrl);
+        
+        // Assigner l'URL de l'image à l'élément <img>
+        qrImage.src = qrImageUrl;
+        
+        // Afficher l'image après avoir défini la source
+        qrImage.style.display = 'block'; // Afficher l'image une fois générée
+      } else {
+        // Si la requête échoue, afficher une alerte
+        alert('Erreur lors de la génération du QR code.');
+      }
+    });
+  </script>
+</body>
+</html>
